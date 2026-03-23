@@ -2,6 +2,23 @@ const express = require('express');
 const app = express();
 
 app.use(express.json());
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+// 🔐 API KEY SECURITY (ADD HERE)
+const API_KEY = "justrich123";
+
+app.use((req, res, next) => {
+    const key = req.headers['x-api-key'];
+
+    if (key !== API_KEY) {
+        return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    next();
+});
 
 // TEMP DATABASE
 let orders = [];
