@@ -21,7 +21,7 @@ app.post('/api/order', (req, res) => {
         network,
         number,
         bundle,
-        status: "pending",
+        status: "processing",
         date: new Date()
     };
 
