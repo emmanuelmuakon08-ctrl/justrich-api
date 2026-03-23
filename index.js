@@ -2,15 +2,14 @@ const express = require('express');
 const app = express();
 
 app.use(express.json());
-const express = require('express');
-const app = express();
 
-app.use(express.json());
-
-// 🔐 API KEY SECURITY (ADD HERE)
+// 🔐 API KEY SECURITY
 const API_KEY = "justrich123";
 
 app.use((req, res, next) => {
+    // Allow homepage without key
+    if (req.path === '/') return next();
+
     const key = req.headers['x-api-key'];
 
     if (key !== API_KEY) {
@@ -24,7 +23,7 @@ app.use((req, res, next) => {
 let orders = [];
 let id = 1;
 
-// HOME
+// HOME (public)
 app.get('/', (req, res) => {
     res.send('JustRich API is LIVE 🚀');
 });
